@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: dog,EN,dev
+matei:
+  username: username-yml
+  password: password-yml
+  jdbcurl: url-yml
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+matei:
+  username: username-yml-prod
+  password: password-yml-prod
+  jdbcurl: url-yml-prod

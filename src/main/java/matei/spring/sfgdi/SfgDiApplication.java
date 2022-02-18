@@ -2,6 +2,9 @@ package matei.spring.sfgdi;
 
 import matei.spring.sfgdi.Controllers.*;
 import matei.spring.sfgdi.Controllers.PetController;
+import matei.spring.sfgdi.config.ConstructorConfig;
+import matei.spring.sfgdi.config.MyConfiguration;
+import matei.spring.sfgdi.datasource.FakeDatasource;
 import matei.spring.sfgdi.services.PrototypeBean;
 import matei.spring.sfgdi.services.SingeltonBean;
 import org.springframework.boot.SpringApplication;
@@ -56,6 +59,24 @@ public class SfgDiApplication {
 		System.out.println(prototypeBean.getMyScope());
 		PrototypeBean prototypeBean1 =ctx.getBean(PrototypeBean.class);
 		System.out.println(prototypeBean1.getMyScope());
+
+		FakeDatasource fakeDatasource = ctx.getBean(FakeDatasource.class);
+		System.out.println(fakeDatasource.getUsername());
+		System.out.println(fakeDatasource.getPassword());
+		System.out.println(fakeDatasource.getJdbcurl());
+
+		System.out.println("_____Config props bean_____");
+		MyConfiguration myConfiguration = ctx.getBean(MyConfiguration.class);
+		System.out.println(myConfiguration.getUsername());
+		System.out.println(myConfiguration.getPassword());
+		System.out.println(myConfiguration.getJdbcurl());
+
+		System.out.println("____Constructor Binding_____");
+		ConstructorConfig config = ctx.getBean(ConstructorConfig.class);
+		System.out.println(config.getUsername());
+		System.out.println(config.getPassword());
+		System.out.println(config.getJdbcurl());
+
 	}
 
 }

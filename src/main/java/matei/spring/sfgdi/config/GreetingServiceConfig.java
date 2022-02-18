@@ -1,14 +1,16 @@
 package matei.spring.sfgdi.config;
 
-import com.springframework.pets.DogPetService;
 import com.springframework.pets.PetService;
 import com.springframework.pets.PetServiceFactory;
+import matei.spring.sfgdi.datasource.FakeDatasource;
 import matei.spring.sfgdi.repositories.EnglishGreetingRepository;
 import matei.spring.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import matei.spring.sfgdi.services.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
-import org.springframework.stereotype.Service;
 
+@EnableConfigurationProperties(ConstructorConfig.class)
 @ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
@@ -67,5 +69,14 @@ public class GreetingServiceConfig {
     @Profile({"cat"})
     PetService catPetService(PetServiceFactory petServiceFactory){
         return petServiceFactory.getPetService("cat");
+    }
+
+    @Bean
+    FakeDatasource fakeDatasource(ConstructorConfig config){
+        FakeDatasource fakeDatasource = new FakeDatasource();
+        fakeDatasource.setUsername(config.getUsername());
+        fakeDatasource.setPassword(config.getPassword());
+        fakeDatasource.setJdbcurl(config.getJdbcurl());
+        return fakeDatasource;
     }
 }

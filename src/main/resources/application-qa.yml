@@ -1,0 +1,4 @@
+matei:
+  username: username-yml-qa
+  password: password-yml-qa
+  jdbcurl: url-yml-qa
